@@ -1,5 +1,5 @@
 def solution(items):
-    r_list = []
+    rtn = {}
     for i in range(len(items)):
         if items[i]:
             necklace = []
@@ -7,10 +7,17 @@ def solution(items):
                 necklace.append(i)
                 t = i
                 i, items[t] = items[i], None
-            r_list.append(necklace)
-    print(r_list)
-    return max([len(x) for x in r_list])
+            length = len(necklace)
+            if rtn.get(length):
+                rtn[length].append(necklace)
+            else:
+                rtn[length] = [necklace]
+    # print(rtn)
+    return max(rtn.keys())
 
 
 necklace_list = [5, 4, 0, 3, 1, 6, 2]
+print(solution(necklace_list))
+
+necklace_list = [1,0, 3, 2]
 print(solution(necklace_list))
